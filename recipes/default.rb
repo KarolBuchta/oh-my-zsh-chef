@@ -14,9 +14,9 @@ node['oh_my_zsh']['users'].each do |user_hash|
   home_directory = `cat /etc/passwd | grep "^#{user_hash[:login]}:" | cut -d ":" -f6`.chop
 
   if platform?("mac_os_x")
-    home_directory = `echo ~"#{user_hash[:login]}"`.chop
+    home_directory = `echo ~#{user_hash[:login]}`.chop
   end
-  
+
   git "#{home_directory}/.oh-my-zsh" do
     repository node['oh_my_zsh'][:repository]
     user user_hash[:login]
