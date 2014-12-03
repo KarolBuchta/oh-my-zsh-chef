@@ -3,9 +3,11 @@
 # Recipe:: default
 #
 
-if node['oh_my_zsh']['users'].any?
-  package "zsh"
-  include_recipe "git"
+unless platform?("mac_os_x")
+  if node['oh_my_zsh']['users'].any?
+    package "zsh"
+    include_recipe "git"
+  end
 end
 
 # for each listed user
